@@ -173,8 +173,7 @@ FList.BBParser = function() {
 		    }
 
 		    if (warningsEnabled && astElem.tagname) {
-			    warnings.push('The [' + astElem.tagname + '] tag is not allowed here: ' +
-			                  currentText.substr(astElem.start, 60) + '...')
+			    warnings.push(`The [${astElem.tagname}] tag is not allowed here: ${currentText.substr(astElem.start, 60)}...`)
 		    }
 
 		    return currentText.substring(astElem.start, astElem.end)
@@ -366,8 +365,8 @@ FList.BBParser = function() {
 
 					if (match[1] !== '[' && match[1] !== '[/' || match[3] !== ']' || !tags[match[2]]) {
 						let tag = match[0].replace(/\[/g, '&#91;').replace(/]/g, '&#93;')
-						pos = pos + match.index + tag.length
 						text = text.slice(0, pos + match.index) + tag + text.slice(pos + match.index + match[0].length)
+						pos += match.index + tag.length
 					} else {
 						pos += match[0].length
 					}
